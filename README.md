@@ -14,10 +14,10 @@ Update your own row at every check-in.
 |---|---|---|---|---|---|
 | Day 1 | Aryan |  | | | |
 | Day 1 | Rehaan |  | | | |
-| Day 1 | Harsita | | | | |
+| Day 1 | Harsita | Set up GitHub repo, README and collaborators. | YES | Built A1 (register) and A2 (login) with JWT token helpers | No |
 | Day 2 | Aryan | | | | |
 | Day 2 | Rehaan | | | | |
-| Day 2 | Harsita | | | | |
+| Day 2 | Harsita | Built A1 (register) and A2 (login) with JWT token helpers | Yes | Frontend and Docker | Nothing |
 | Day 3 | Aryan | | | | |
 | Day 3 | Rehaan | | | | |
 | Day 3 | Harsita | | | | |
@@ -28,18 +28,18 @@ Status: ✅ done · 🟡 in progress · ⬜ not started
 
 | # | Method + path | Built | Rules checked in /docs | Connected to React | Who |
 |---|---|---|---|---|---|
-| A1 | POST /register | ⬜ | ⬜ | ⬜ |  |
-| A2 | POST /login | ⬜ | ⬜ | ⬜ |  |
-| A3 | POST /refresh | ⬜ | ⬜ | ⬜ | |
-| E1 | GET /attendance | ⬜ | ⬜ | ⬜ |  |
-| E2 | POST /attendance | ⬜ | ⬜ | ⬜ |  |
+| A1 | POST /register | ⬜ | ⬜ | ⬜ | Harsita |
+| A2 | POST /login | ⬜ | ⬜ | ⬜ | Harsita |
+| A3 | POST /refresh | ⬜ | ⬜ | ⬜ | Aryan |
+| E1 | GET /attendance | ⬜ | ⬜ | ⬜ | Rehaan |
+| E2 | POST /attendance | ⬜ | ⬜ | ⬜ | Rehaan |
 
 ## 3. Frontend tracker
 
 | Part (from section 5 of your PRD) | Shows the data | Buttons work | Shows API errors | Who |
 |---|---|---|---|---|
 | Registration | ⬜ | ⬜ | ⬜ | |
-| Login | ⬜ | ⬜ | ⬜ | Harsita |
+| Login | ⬜ | ⬜ | ⬜ |  |
 | Attendance Dashboard | ⬜ | ⬜ | ⬜ |  |
 | Mark Attendance (Bonus) | ⬜ | ⬜ | ⬜ |  |
 
