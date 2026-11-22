@@ -56,7 +56,7 @@ def hello():
 
 
 # ---------- A1: Register ----------
-@app.post("/register", status_code=201)
+@app.post("/register")
 def register(data: RegisterRequest):
     if data.username.strip() == "" or data.password.strip() == "":
         raise HTTPException(status_code=422, detail="Username and password cannot be empty")
@@ -93,7 +93,7 @@ def get_attendance(token = Header(None)):
 
 
 # ---------- E2: Mark attendance ----------
-@app.post("/attendance", status_code=201)
+@app.post("/attendance")
 def mark_attendance(data: AttendanceCreate, token = Header(None)):
     user_id = check_token(token)
     validate_attendance(student_name=data.student_name, roll_no=data.roll_no, status=data.status)
