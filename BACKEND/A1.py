@@ -1,17 +1,12 @@
-from sqlalchemy import create_engine, String, Column, Integer, Float, Date, ForeignKey, func
-from sqlalchemy.orm import Session, declarative_base
-from datetime import datetime, timedelta, timezone
-import jwt
-from database import engine, Session, User, ph
+from sqlalchemy.orm import Session
+from argon2 import PasswordHasher
+from database import engine, User
 
-
-ACCESS_TOKEN_EXPIRY = 15 #mins
-REFRESH_TOKEN_EXPIRY = 7 * 24 * 60
-SECRET_KEY = "SECRET123"
-ALGORITHM = "HS256"
+ph = PasswordHasher()
 
 
 # A1: Register a new teacher
+
 def register_teacher(username, email, password):
     session = Session(engine)
     user_exists = session.query(User).filter_by(email=email).first()
@@ -20,11 +15,7 @@ def register_teacher(username, email, password):
         session.close()
         return False
 
-    session.add(User(
-        username=username,
-        email=email,
-        hashed_password=ph.hash(password)
-    ))
+    session.add(User(username=username, email=email, hashed_password=ph.hash(password)))
     session.commit()
     session.close()
     return True
