@@ -5,7 +5,7 @@ from database import engine, User
 ph = PasswordHasher()
 
 
-# A1: Register a new teacher
+# A1:Register a new teacher
 
 def register_teacher(username, email, password):
     session = Session(engine)
