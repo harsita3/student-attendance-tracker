@@ -4,6 +4,8 @@ from pydantic import BaseModel
 import E1
 import E2
 import e3
+import A1
+import A2
 
 app = FastAPI(title="Student Attendance Tracker")
 
@@ -16,6 +18,17 @@ class AttendanceCreate(BaseModel):
     roll_no: str
     attendance_date: date
     status: str
+
+
+class RegisterRequest(BaseModel):
+    username: str
+    email: str
+    password: str
+
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
 
 
 def check_token(token):
@@ -42,9 +55,25 @@ def hello():
     return {"message": "Student Attendance Tracker API. Docs at /docs"}
 
 
-# ---------- A1: POST /register  (teammate adds here) ----------
+# ---------- A1: Register ----------
+@app.post("/register", status_code=201)
+def register(data: RegisterRequest):
+    if data.username.strip() == "" or data.password.strip() == "":
+        raise HTTPException(status_code=422, detail="Username and password cannot be empty")
+    if "@" not in data.email or "." not in data.email:
+        raise HTTPException(status_code=422, detail="Invalid email format")
+    if A1.register_teacher(username=data.username, email=data.email, password=data.password):
+        return {"message": "Teacher registered successfully"}
+    raise HTTPException(status_code=409, detail="Email already registered")
 
-# ---------- A2: POST /login     (teammate adds here) ----------
+
+# ---------- A2: Login ----------
+@app.post("/login")
+def login(data: LoginRequest):
+    tokens = A2.verify_login(email=data.email, password=data.password)
+    if not tokens:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    return tokens
 
 
 # ---------- A3: Refresh ----------
