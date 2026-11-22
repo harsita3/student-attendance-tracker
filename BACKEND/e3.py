@@ -1,8 +1,7 @@
-from fastapi import FastAPI, HTTPException, Header
+from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, timezone
 import jwt
-
-app = FastAPI(title="Student Attendance Tracker")
+from database import engine, User
 
 ACCESS_TOKEN_EXPIRY = 15 #mins
 REFRESH_TOKEN_EXPIRY = 7 * 24 * 60
@@ -10,7 +9,7 @@ SECRET_KEY = "SECRET123"
 ALGORITHM = "HS256"
 
 
-# ---------- Tokens ----------
+# ---------- Tokens (shared by login, refresh and protected endpoints) ----------
 
 def create_token(email, token_type):
     time = ACCESS_TOKEN_EXPIRY
@@ -36,13 +35,25 @@ def verify_token(token, token_type):
     return False
 
 
+def get_user_id(email):
+    session = Session(engine)
+
+    user = session.query(User).filter_by(email=email).first()
+
+    if user is None:
+        session.close()
+        return None
+
+    user_id = user.id
+
+    session.close()
+    return user_id
+
+
 # ---------- A3: Generate a new access token using a refresh token ----------
 
-@app.post("/refresh")
-def refresh(refresh_token = Header(None, convert_underscores=False)):
+def refresh_access_token(refresh_token):
     email = verify_token(token=refresh_token, token_type="refresh")
     if not email:
-        raise HTTPException(status_code=401, detail="Invalid or Expired refresh token")
-
-    access_token = create_token(email=email, token_type="access")
-    return {"access_token": access_token}
+        return False
+    return create_token(email=email, token_type="access")
