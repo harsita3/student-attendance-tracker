@@ -28,20 +28,20 @@ Status: ✅ done · 🟡 in progress · ⬜ not started
 
 | # | Method + path | Built | Rules checked in /docs | Connected to React | Who |
 |---|---|---|---|---|---|
-| A1 | POST /register | ⬜ | ⬜ | ⬜ | Aryan |
-| A2 | POST /login | ⬜ | ⬜ | ⬜ | Aryan |
-| A3 | POST /refresh | ⬜ | ⬜ | ⬜ | Aryan |
-| E1 | GET /attendance | ⬜ | ⬜ | ⬜ | Rehaan |
-| E2 | POST /attendance | ⬜ | ⬜ | ⬜ | Rehaan |
+| A1 | POST /register | ⬜ | ⬜ | ⬜ |  |
+| A2 | POST /login | ⬜ | ⬜ | ⬜ |  |
+| A3 | POST /refresh | ⬜ | ⬜ | ⬜ | |
+| E1 | GET /attendance | ⬜ | ⬜ | ⬜ |  |
+| E2 | POST /attendance | ⬜ | ⬜ | ⬜ |  |
 
 ## 3. Frontend tracker
 
 | Part (from section 5 of your PRD) | Shows the data | Buttons work | Shows API errors | Who |
 |---|---|---|---|---|
-| Registration | ⬜ | ⬜ | ⬜ | Harsita |
+| Registration | ⬜ | ⬜ | ⬜ | |
 | Login | ⬜ | ⬜ | ⬜ | Harsita |
-| Attendance Dashboard | ⬜ | ⬜ | ⬜ | Harsita |
-| Mark Attendance (Bonus) | ⬜ | ⬜ | ⬜ | Rehaan |
+| Attendance Dashboard | ⬜ | ⬜ | ⬜ |  |
+| Mark Attendance (Bonus) | ⬜ | ⬜ | ⬜ |  |
 
 ## 4. Tech Stack & Deployment
 
