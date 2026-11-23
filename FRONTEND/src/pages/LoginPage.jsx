@@ -11,12 +11,6 @@ function LoginPage() {
 
     async function handleLogin(event) {
         event.preventDefault();
-        setMessage("");
-
-        if (email.trim() === "" || password.trim() === "") {
-            setMessage("Email and password cannot be empty");
-            return;
-        }
 
         try {
             const res = await fetch(`${API_URL}/login`, {
@@ -27,11 +21,7 @@ function LoginPage() {
             const data = await res.json();
 
             if (!res.ok) {
-                if (typeof data.detail === "string") {
-                    setMessage(data.detail);
-                } else {
-                    setMessage("Please enter a valid email and password");
-                }
+                setMessage(data.detail);
                 return;
             }
 
@@ -49,7 +39,7 @@ function LoginPage() {
         <form onSubmit={handleLogin}>
             <p>
                 <label>Email: </label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input value={email} onChange={(e) => setEmail(e.target.value)} />
             </p>
             <p>
                 <label>Password: </label>
@@ -57,7 +47,7 @@ function LoginPage() {
             </p>
             <button type="submit">Login</button>
         </form>
-        {message && <p>{message}</p>}
+        <p>{message}</p>
         </>
     );
 }

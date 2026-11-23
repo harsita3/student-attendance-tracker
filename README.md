@@ -28,9 +28,9 @@ Backend runs on **port 8001** with CORS enabled so the React frontend can commun
 |---|---|---|---|---|---|
 | A1 | Register a new teacher | POST | `/register` | `{ username, email, password }` | 200 |
 | A2 | Login and generate JWT access and refresh tokens | POST | `/login` | `{ email, password }` | 200 |
-| A3 | Generate a new access token using a refresh token | POST | `/refresh` | `{ refresh_token }` | 200 |
-| E1 | Get all attendance records created by the logged-in teacher | GET | `/attendance` | — (JWT access token in `Authorization: Bearer` header) | 200 |
-| E2 | Mark a student's attendance and associate it with the logged-in teacher | POST | `/attendance` | `{ student_name, roll_no, attendance_date, status }` + JWT header | 200 |
+| A3 | Generate a new access token using a refresh token | POST | `/refresh` | — (refresh token in `refresh_token` header) | 200 |
+| E1 | Get all attendance records created by the logged-in teacher | GET | `/attendance` | — (access token in `token` header) | 200 |
+| E2 | Mark a student's attendance and associate it with the logged-in teacher | POST | `/attendance` | `{ student_name, roll_no, attendance_date, status }` + access token in `token` header | 200 |
 
 ## 3. Rules the API checks (from Section 4 of the PRD)
 
@@ -80,7 +80,7 @@ Frontend requirements (PRD): real API calls only, no hardcoded data · JWT sent 
 ## 7. How to Run Locally
 
 ### Backend
-1. Navigate to the `backend` folder.
+1. Navigate to the `BACKEND` folder.
 2. Create a virtual environment and install dependencies:
    ```bash
    python -m venv venv
@@ -94,7 +94,7 @@ Frontend requirements (PRD): real API calls only, no hardcoded data · JWT sent 
 4. Open Swagger UI: http://127.0.0.1:8001/docs
 
 ### Frontend
-1. Navigate to the `frontend` folder.
+1. Navigate to the `FRONTEND` folder.
 2. Install dependencies and start the dev server:
    ```bash
    npm install

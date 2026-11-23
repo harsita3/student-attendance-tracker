@@ -3,13 +3,11 @@ from datetime import datetime, timedelta, timezone
 import jwt
 from database import engine, User
 
-ACCESS_TOKEN_EXPIRY = 15 #mins
+ACCESS_TOKEN_EXPIRY = 15
 REFRESH_TOKEN_EXPIRY = 7 * 24 * 60
 SECRET_KEY = "SECRET123"
 ALGORITHM = "HS256"
 
-
-# ---------- Tokens (shared by login, refresh and protected endpoints) ----------
 
 def create_token(email, token_type):
     time = ACCESS_TOKEN_EXPIRY
@@ -49,8 +47,6 @@ def get_user_id(email):
     session.close()
     return user_id
 
-
-# ---------- A3: Generate a new access token using a refresh token ----------
 
 def refresh_access_token(refresh_token):
     email = verify_token(token=refresh_token, token_type="refresh")

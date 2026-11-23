@@ -9,9 +9,7 @@ jobs:
   build-push-deploy:
     runs-on: ubuntu-latest
     env:
-      # Docker Hub image name in the form <dockerhub-username>/<repo-name>, e.g. malnadhudga/todo-list.
-      # The username comes from the DOCKERHUB_USERNAME secret; change "todo-list" to your own repo name.
-      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/todolistrehaan
+      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/student-attendance-tracker
       VERSION: v${{ github.run_number }}
     steps:
       - uses: actions/checkout@v4
@@ -25,8 +23,8 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: dockerfile
+          context: BACKEND
+          file: BACKEND/Dockerfile
           push: true
           tags: |
             ${{ env.IMAGE }}:latest
@@ -41,9 +39,9 @@ jobs:
           script: |
             set -e
             sudo systemctl enable --now docker
-            sudo usermod -aG docker $USER
+            mkdir -p $HOME/attendance-data
             sudo docker pull ${{ env.IMAGE }}:${{ env.VERSION }}
-            sudo docker rm -f todo-list || true
-            sudo docker run -d --name todo-list --restart unless-stopped -p 8000:8000 ${{ env.IMAGE }}:${{ env.VERSION }}
+            sudo docker rm -f attendance-tracker || true
+            sudo docker run -d --name attendance-tracker --restart unless-stopped -p 8001:8001 -v $HOME/attendance-data:/app/data -e DB_URL=sqlite:////app/data/attendance.db ${{ env.IMAGE }}:${{ env.VERSION }}
             sudo docker image prune -af
-            sudo docker ps --filter name=todo-list
+            sudo docker ps --filter name=attendance-tracker
