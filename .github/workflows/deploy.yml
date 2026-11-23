@@ -50,11 +50,11 @@ jobs:
           script: |
             set -e
             sudo systemctl enable --now docker
-            mkdir -p $HOME/attendance-data
+            sudo mkdir -p /opt/attendance/data
             sudo docker pull ${{ env.IMAGE }}:${{ env.VERSION }}
             sudo docker pull ${{ env.FRONTEND_IMAGE }}:${{ env.VERSION }}
             sudo docker rm -f attendance-tracker attendance-frontend || true
-            sudo docker run -d --name attendance-tracker --restart unless-stopped -p 8001:8001 -v $HOME/attendance-data:/app/data -e DB_URL=sqlite:////app/data/attendance.db -e SECRET_KEY='${{ secrets.JWT_SECRET_KEY }}' ${{ env.IMAGE }}:${{ env.VERSION }}
+            sudo docker run -d --name attendance-tracker --restart unless-stopped -p 8001:8001 -v /opt/attendance/data:/app/data -e SECRET_KEY='${{ secrets.JWT_SECRET_KEY }}' ${{ env.IMAGE }}:${{ env.VERSION }}
             sudo docker run -d --name attendance-frontend --restart unless-stopped -p 80:80 ${{ env.FRONTEND_IMAGE }}:${{ env.VERSION }}
             sudo docker image prune -af
             sudo docker ps

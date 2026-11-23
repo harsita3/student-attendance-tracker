@@ -65,9 +65,9 @@ The backend address is kept in one place, `FRONTEND/src/config.js`. It uses the 
 ```bash
 cd BACKEND
 docker build -t student-attendence .
+sudo mkdir -p /opt/attendance/data
 docker run -d --name attendance-tracker -p 8001:8001 \
-  -v ~/attendance-data:/app/data \
-  -e DB_URL=sqlite:////app/data/attendance.db \
+  -v /opt/attendance/data:/app/data \
   student-attendence
 
 cd ../FRONTEND
@@ -84,7 +84,7 @@ docker pull aryannvrao/student-attendence-frontend:latest
 
 ### CI/CD
 
-Every push to `main` runs `.github/workflows/deploy.yml`: it builds both images, pushes them to Docker Hub, connects to EC2 over SSH, replaces the running containers and starts the new ones. `attendance.db` lives in `~/attendance-data` on EC2 and is mounted into the container, so records survive every redeploy.
+Every push to `main` runs `.github/workflows/deploy.yml`: it builds both images, pushes them to Docker Hub, connects to EC2 over SSH, replaces the running containers and starts the new ones. `attendance.db` lives in `/opt/attendance/data` on EC2, which is bind-mounted into the container at `/app/data` (`-v /opt/attendance/data:/app/data`), so records survive every redeploy.
 
 GitHub Actions secrets used: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY`, `JWT_SECRET_KEY`.
 
