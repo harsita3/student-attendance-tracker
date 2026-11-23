@@ -69,7 +69,7 @@ function DashboardPage() {
 
     return (
         <>
-        <h2>Teacher Attendance Dashboard</h2>
+        <h2>My Attendance Records</h2>
         <p>Showing only your own attendance records.</p>
         <button onClick={logout}>Logout</button>
         <p>{message}</p>
