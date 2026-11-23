@@ -26,8 +26,8 @@ A web app where teachers register, log in, mark students present or absent, and 
 
 ## 2. Live app
 
-- Frontend: http://EC2_PUBLIC_IP
-- API docs: http://EC2_PUBLIC_IP:8001/docs
+- Frontend: http://13.233.100.147
+- API docs: http://13.233.100.147:8001/docs
 
 ## 3. How to run it
 
