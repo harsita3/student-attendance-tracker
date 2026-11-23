@@ -1,3 +1,4 @@
+import os
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, timezone
 import jwt
@@ -5,7 +6,7 @@ from database import engine, User
 
 ACCESS_TOKEN_EXPIRY = 15
 REFRESH_TOKEN_EXPIRY = 7 * 24 * 60
-SECRET_KEY = "SECRET123"
+SECRET_KEY = os.getenv("SECRET_KEY") or "local-dev-key"
 ALGORITHM = "HS256"
 
 
