@@ -51,6 +51,7 @@ jobs:
             set -e
             sudo systemctl enable --now docker
             sudo mkdir -p /opt/attendance/data
+            if [ -f "$HOME/attendance-data/attendance.db" ] && [ ! -f /opt/attendance/data/attendance.db ]; then sudo cp "$HOME/attendance-data/attendance.db" /opt/attendance/data/; fi
             sudo docker pull ${{ env.IMAGE }}:${{ env.VERSION }}
             sudo docker pull ${{ env.FRONTEND_IMAGE }}:${{ env.VERSION }}
             sudo docker rm -f attendance-tracker attendance-frontend || true
